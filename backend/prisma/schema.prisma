@@ -15,6 +15,15 @@ model Product {
   assemblyLines AssemblyLine[]
 }
 
+model User {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  passwordHash String
+  name         String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
 model AssemblyLine {
   id        String   @id @default(uuid())
   name      String

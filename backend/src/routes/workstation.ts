@@ -1,12 +1,13 @@
 import { Router } from 'express';
 import * as controller from '../controllers/workstationController';
+import { authenticate } from '../middleware/authMiddleware';
 
 const router = Router();
 
 router.get('/', controller.listWorkstations);
-router.post('/', controller.createWorkstation);
+router.post('/', authenticate, controller.createWorkstation);
 router.get('/:id', controller.getWorkstation);
-router.put('/:id', controller.updateWorkstation);
-router.delete('/:id', controller.deleteWorkstation);
+router.put('/:id', authenticate, controller.updateWorkstation);
+router.delete('/:id', authenticate, controller.deleteWorkstation);
 
 export default router;

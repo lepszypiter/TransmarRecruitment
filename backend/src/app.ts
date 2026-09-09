@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import productRoutes from './routes/product';
 import assemblyLineRoutes from './routes/assemblyLine';
 import workstationRoutes from './routes/workstation';
+import authRoutes from './routes/auth';
 
 dotenv.config();
 
@@ -16,5 +17,6 @@ app.get('/health', (req, res) => res.json({ status: 'ok' }));
 app.use('/api/products', productRoutes);
 app.use('/api/assembly-lines', assemblyLineRoutes);
 app.use('/api/workstations', workstationRoutes);
+app.use('/api/auth', authRoutes);
 
 export default app;
