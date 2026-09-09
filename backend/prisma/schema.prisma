@@ -23,4 +23,30 @@ model AssemblyLine {
   product   Product? @relation(fields: [productId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  allocations AssemblyLineWorkstation[]
+}
+
+model Workstation {
+  id         String                      @id @default(uuid())
+  short_name String
+  name       String
+  pc_name    String
+  createdAt  DateTime                    @default(now())
+  updatedAt  DateTime                    @updatedAt
+  allocations AssemblyLineWorkstation[]
+}
+
+model AssemblyLineWorkstation {
+  id             String      @id @default(uuid())
+  assemblyLineId String
+  workstationId  String
+  position       Int         @default(0)
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+
+  assemblyLine AssemblyLine @relation(fields: [assemblyLineId], references: [id])
+  workstation  Workstation  @relation(fields: [workstationId], references: [id])
+
+  @@unique([assemblyLineId, workstationId])
+  @@index([assemblyLineId])
 }
