@@ -26,6 +26,26 @@ Quick start
 
 4. Run dev server
 
+Tests
+
+Run unit tests (Jest + ts-jest):
+
+  npm install
+  npm test
+
+Deploy notes
+
+- The app uses SQLite by default for local development (`DATABASE_URL` in `.env`). For production use PostgreSQL or another provider — update `prisma/schema.prisma` datasource and migrate.
+- Build backend: `npm run build` then `npm start` (ensure `NODE_ENV=production` and `DATABASE_URL` point to production DB).
+- For containerized deployment, create a `Dockerfile` and `docker-compose.yml` (not included) to run Postgres and the Node app. Expose port defined by `PORT` env var (default 4000).
+- Secure secrets: set `JWT_SECRET` and do not commit `.env`.
+
+Final cleanup
+
+- Run `npx prisma generate` after changing schema to update client.
+- Remove dev-only seed data before sharing production credentials.
+
+
    npm run dev
 
 API Endpoints (basic)
