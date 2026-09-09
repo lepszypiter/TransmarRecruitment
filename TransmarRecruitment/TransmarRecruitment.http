@@ -1,0 +1,6 @@
+@TransmarRecruitment_HostAddress = http://localhost:5047
+
+GET {{TransmarRecruitment_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
