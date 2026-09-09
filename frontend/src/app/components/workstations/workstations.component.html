@@ -1,0 +1,17 @@
+<div>
+  <h2>Workstations</h2>
+
+  <div class="form-row">
+    <input [(ngModel)]="short_name" placeholder="Short name" />
+    <input [(ngModel)]="name" placeholder="Name" />
+    <input [(ngModel)]="pc_name" placeholder="PC name" />
+    <button class="btn primary" (click)="create()">Create</button>
+  </div>
+
+  <div class="list">
+    <div *ngFor="let w of workstations" class="item">
+      <strong>{{w.name}}</strong> ({{w.short_name}}) - {{w.pc_name}}
+      <button class="btn" (click)="remove(w.id)" style="float:right">Delete</button>
+    </div>
+  </div>
+</div>

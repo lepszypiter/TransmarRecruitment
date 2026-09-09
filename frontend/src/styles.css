@@ -1,0 +1,9 @@
+/* basic styles */
+body { font-family: Arial, Helvetica, sans-serif; margin: 16px; }
+nav a { margin-right: 8px; }
+.container { max-width: 900px; margin: 0 auto; }
+.list { margin-top: 12px; }
+.item { padding: 8px; border: 1px solid #ddd; margin-bottom: 6px; background: #fff; }
+.form-row { margin-bottom: 8px; }
+.btn { padding: 6px 10px; border: 1px solid #888; background: #f3f3f3; cursor: pointer; }
+.btn.primary { background: #007bff; color: white; border-color: #007bff; }

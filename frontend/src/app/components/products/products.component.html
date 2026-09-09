@@ -1,0 +1,14 @@
+<div>
+  <h2>Products</h2>
+
+  <div class="form-row">
+    <input [(ngModel)]="name" placeholder="Product name" />
+    <button class="btn primary" (click)="create()">Create</button>
+  </div>
+  <div class="list">
+    <div *ngFor="let p of products" class="item">
+      <strong>{{p.name}}</strong>
+      <button class="btn" (click)="remove(p.id)" style="float:right">Delete</button>
+    </div>
+  </div>
+</div>

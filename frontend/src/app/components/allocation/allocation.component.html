@@ -1,0 +1,20 @@
+<div>
+  <h2>Allocations for assembly line</h2>
+  <div *ngIf="!assemblyLineId">No assembly line selected</div>
+
+  <div *ngIf="assemblyLineId">
+    <h3>Current order</h3>
+    <div cdkDropList (cdkDropListDropped)="drop($event)" class="list">
+      <div *ngFor="let a of allocations" cdkDrag class="item">
+        {{a.position}} - {{a.workstation?.name || a.workstationId}}
+        <button class="btn" style="float:right" (click)="remove(a.id)">Remove</button>
+      </div>
+    </div>
+
+    <h3>Add workstations</h3>
+    <div *ngFor="let w of available" class="item">
+      <input type="checkbox" (change)="$event.target.checked ? select(w.id, true) : select(w.id, false)" /> {{w.name}} ({{w.short_name}})
+    </div>
+    <button class="btn primary" (click)="addSelected()">Add selected</button>
+  </div>
+</div>

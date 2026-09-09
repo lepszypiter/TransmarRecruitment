@@ -1,0 +1,21 @@
+<div>
+  <h2>Assembly Lines</h2>
+
+  <div class="form-row">
+    <input [(ngModel)]="name" placeholder="Line name" />
+    <select [(ngModel)]="productId">
+      <option [ngValue]="null">-- select product --</option>
+      <option *ngFor="let p of products" [ngValue]="p.id">{{p.name}}</option>
+    </select>
+    <button class="btn primary" (click)="create()">Create</button>
+  </div>
+
+  <div class="list">
+    <div *ngFor="let l of lines" class="item">
+      <strong>{{l.name}}</strong>
+      <div>Product: {{l.productId}}</div>
+      <a [routerLink]="['/assembly-lines', l.id, 'allocations']">Manage allocations</a>
+      <button class="btn" (click)="remove(l.id)" style="float:right">Delete</button>
+    </div>
+  </div>
+</div>
