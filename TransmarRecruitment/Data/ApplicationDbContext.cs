@@ -13,6 +13,7 @@ namespace TransmarRecruitment.Data
         public DbSet<AssemblyLine> AssemblyLines { get; set; } = null!;
         public DbSet<Workstation> Workstations { get; set; } = null!;
         public DbSet<AssemblyLineWorkstation> AssemblyLineWorkstations { get; set; } = null!;
+        public DbSet<TransmarRecruitment.Models.User> Users { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
