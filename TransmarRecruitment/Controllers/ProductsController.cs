@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TransmarRecruitment.Data;
 using TransmarRecruitment.Models;
+using TransmarRecruitment.DTOs;
 
 namespace TransmarRecruitment.Controllers
 {
@@ -32,16 +33,29 @@ namespace TransmarRecruitment.Controllers
             return Ok(item);
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] Product model)
+        public async Task<IActionResult> Create([FromBody] CreateProductDto model)
         {
-            _db.Products.Add(model);
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            var product = new Product { Name = model.Name };
+
+            if (model.AssemblyLines != null && model.AssemblyLines.Any())
+            {
+                product.AssemblyLines = model.AssemblyLines.Select(a => new AssemblyLine
+                {
+                    Name = a.Name,
+                    Active = a.Active
+                }).ToList();
+            }
+
+            _db.Products.Add(product);
             await _db.SaveChangesAsync();
-            return CreatedAtAction(nameof(Get), new { id = model.Id }, model);
+            return CreatedAtAction(nameof(Get), new { id = product.Id }, product);
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, [FromBody] Product model)
         {
@@ -52,7 +66,7 @@ namespace TransmarRecruitment.Controllers
             return Ok(existing);
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

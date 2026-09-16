@@ -29,7 +29,7 @@ namespace TransmarRecruitment.Controllers
             return Ok(list);
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpPost]
         public async Task<IActionResult> Add(int assemblyLineId, [FromBody] AddModel model)
         {
@@ -58,7 +58,7 @@ namespace TransmarRecruitment.Controllers
             return CreatedAtAction(nameof(GetAll), new { assemblyLineId }, created);
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpPut("reorder")]
         public async Task<IActionResult> Reorder(int assemblyLineId, [FromBody] ReorderModel model)
         {
@@ -75,7 +75,7 @@ namespace TransmarRecruitment.Controllers
             return Ok();
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpDelete("{allocationId}")]
         public async Task<IActionResult> Delete(int assemblyLineId, int allocationId)
         {
