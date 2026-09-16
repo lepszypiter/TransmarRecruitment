@@ -19,4 +19,13 @@ namespace TransmarRecruitment.DTOs
         // Optional: create assembly lines together with product
         public List<CreateAssemblyLineDto>? AssemblyLines { get; set; }
     }
+
+    public class UpdateProductDto
+    {
+        [Required]
+        public string Name { get; set; } = null!;
+
+        // Optional: replace assembly lines when provided
+        public List<CreateAssemblyLineDto>? AssemblyLines { get; set; }
+    }
 }
