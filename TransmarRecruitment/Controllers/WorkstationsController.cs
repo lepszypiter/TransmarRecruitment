@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TransmarRecruitment.Data;
 using TransmarRecruitment.Models;
+using TransmarRecruitment.DTOs;
 
 namespace TransmarRecruitment.Controllers
 {
@@ -34,17 +35,20 @@ namespace TransmarRecruitment.Controllers
 
         //[Authorize]
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] Workstation model)
+        public async Task<IActionResult> Create([FromBody] CreateWorkstationDto model)
         {
-            _db.Workstations.Add(model);
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            var entity = new Workstation { ShortName = model.ShortName, Name = model.Name, PcName = model.PcName };
+            _db.Workstations.Add(entity);
             await _db.SaveChangesAsync();
-            return CreatedAtAction(nameof(Get), new { id = model.Id }, model);
+            return CreatedAtAction(nameof(Get), new { id = entity.Id }, entity);
         }
 
         //[Authorize]
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] Workstation model)
+        public async Task<IActionResult> Update(int id, [FromBody] UpdateWorkstationDto model)
         {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
             var existing = await _db.Workstations.FindAsync(id);
             if (existing == null) return NotFound();
             existing.ShortName = model.ShortName;

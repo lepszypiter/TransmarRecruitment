@@ -52,7 +52,8 @@ namespace TransmarRecruitment.Controllers
                 product.AssemblyLines = model.AssemblyLines.Select(a => new AssemblyLine
                 {
                     Name = a.Name,
-                    Active = a.Active
+                    Active = a.Active,
+                    ProductId = a.ProductId
                 }).ToList();
             }
 

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TransmarRecruitment.Data;
 using TransmarRecruitment.Models;
+using TransmarRecruitment.DTOs;
 
 namespace TransmarRecruitment.Controllers
 {
@@ -36,17 +37,20 @@ namespace TransmarRecruitment.Controllers
 
         //[Authorize]
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] AssemblyLine model)
+        public async Task<IActionResult> Create([FromBody] AssemblyLineDto model)
         {
-            _db.AssemblyLines.Add(model);
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            var entity = new AssemblyLine { Name = model.Name, Active = model.Active, ProductId = model.ProductId };
+            _db.AssemblyLines.Add(entity);
             await _db.SaveChangesAsync();
-            return CreatedAtAction(nameof(Get), new { id = model.Id }, model);
+            return CreatedAtAction(nameof(Get), new { id = entity.Id }, entity);
         }
 
         //[Authorize]
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] AssemblyLine model)
+        public async Task<IActionResult> Update(int id, [FromBody] AssemblyLineUpdateDto model)
         {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
             var existing = await _db.AssemblyLines.FindAsync(id);
             if (existing == null) return NotFound();
             existing.Name = model.Name;
