@@ -33,7 +33,7 @@ namespace TransmarRecruitment.Controllers
             return Ok(item);
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateWorkstationDto model)
         {
@@ -44,7 +44,7 @@ namespace TransmarRecruitment.Controllers
             return CreatedAtAction(nameof(Get), new { id = entity.Id }, entity);
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, [FromBody] UpdateWorkstationDto model)
         {
@@ -58,7 +58,7 @@ namespace TransmarRecruitment.Controllers
             return Ok(existing);
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

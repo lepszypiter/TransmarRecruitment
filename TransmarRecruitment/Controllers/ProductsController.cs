@@ -39,7 +39,7 @@ namespace TransmarRecruitment.Controllers
             return Ok(item);
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateProductDto model)
         {
@@ -62,7 +62,7 @@ namespace TransmarRecruitment.Controllers
             return CreatedAtAction(nameof(Get), new { id = product.Id }, product);
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, [FromBody] UpdateProductDto model)
         {
@@ -92,7 +92,7 @@ namespace TransmarRecruitment.Controllers
             return Ok(existing);
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
